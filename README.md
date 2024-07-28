@@ -40,3 +40,6 @@ POST /logout - Logout
 POST /user/enrollment/checkout-session - Create Stripe checkout session
 GET /checkout/success - Checkout success
 GET /checkout/cancel - Checkout cancel
+
+## In short, the project works: The customer enters and logs in. If he does not have an account on the site, he creates one. In order to be able to enter and buy any course that the admin has posted on the site, the condition for entering and buying it is that after he buys, the admin must approve the product that the customer has chosen so that he can buy it. After that, the customer, through the approval of this admin, can buy it and pay with the card and all the course contents will be opened for him.
+# Important Note: API Links to copy it to past it in postman exsits in public folder named "laravel api in json links to run it" 
