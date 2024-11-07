@@ -1,66 +1,45 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Learning_Managment_System_API
+This project is a Learning Management System (LMS) built with Laravel, featuring a comprehensive set of routes to handle authentication, user and admin functionalities, course management, and enrollment with Stripe integration.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Authentication Routes
+The authentication routes handle user login, registration, email verification, and password management. These routes are only accessible to guests (unauthenticated users).
 
-## About Laravel
+POST /login - User login
+POST /register - User registration
+POST /email-verification - Email verification
+POST /password/email - Send password reset email
+POST /password/reset - Reset password
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Admin Routes
+Admin routes are protected by auth:sanctum and admin middleware, ensuring that only authenticated admin users can access these routes. They allow admins to manage the dashboard, users, courses, and videos.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+GET /admin/dashboard - Admin dashboard
+PUT /admin/dashboard/accept/{id} - Accept order
+PUT /admin/dashboard/refuse/{id} - Refuse order
+Resource /admin/users - Manage users (except create and edit)
+Resource /admin/courses - Manage courses (except create and edit)
+Resource /admin/courses/course/videos - Manage course videos (except create and edit)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# User Routes
+User routes are protected by auth:sanctum and user middleware, ensuring that only authenticated users can access these routes. They allow users to view courses, manage their dashboard, orders, carts, and reviews.
 
-## Learning Laravel
+GET /home - Home page with courses
+GET /user/dashboard - User dashboard
+GET /user/dashboard/courses - View user's courses
+Resource /user/dashboard/orders - Manage orders (except index, create, and edit)
+Resource /user/dashboard/carts - Manage carts (except create and edit)
+POST /user/dashboard/orders/create - Create order from cart
+Resource /user/dashboard/reviews - Manage reviews (except index, create, edit, and show)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Profile and Enrollment Routes
+These routes are protected by auth:sanctum middleware and allow authenticated users to manage their profile and handle enrollment using Stripe.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+GET /profile - View profile
+PUT /profile - Update profile
+POST /logout - Logout
+POST /user/enrollment/checkout-session - Create Stripe checkout session
+GET /checkout/success - Checkout success
+GET /checkout/cancel - Checkout cancel
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## In short, the project works: The customer enters and logs in. If he does not have an account on the site, he creates one. In order to be able to enter and buy any course that the admin has posted on the site, the condition for entering and buying it is that after he buys, the admin must approve the product that the customer has chosen so that he can buy it. After that, the customer, through the approval of this admin, can buy it and pay with the card and all the course contents will be opened for him.
+# Important Note: API Links to copy it to past it in postman exsits in public folder named "laravel api in json links to run it" 
